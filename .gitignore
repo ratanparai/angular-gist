@@ -1,2 +1,8 @@
 # Dependency directories
 node_modules/
+
+# unnecessary files
+public/js/angular.min.js
+
+# vim swape file
+*.swp
