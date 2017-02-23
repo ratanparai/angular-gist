@@ -1,8 +1,11 @@
 # Dependency directories
 node_modules/
 
-# unnecessary files
+# unnecessary files in public directory
 public/js/angular.min.js
+
+# Do not add generated html files
+public/**/*.html
 
 # vim swape file
 *.swp

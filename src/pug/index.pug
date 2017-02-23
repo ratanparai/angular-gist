@@ -1,0 +1,12 @@
+doctype html
+html(ng-app)
+	head
+		title Sample file
+		script(src='js/angular.min.js')
+	body
+		h1 Sample header
+		p1 sample footer
+		p1 
+			input(ng-model='name', type='text')
+		= '\n'
+		p1 {{name}}
