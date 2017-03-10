@@ -9,3 +9,6 @@ public/**/*.html
 
 # vim swape file
 *.swp
+
+# Webstorm project folder
+.idea/

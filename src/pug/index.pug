@@ -1,8 +1,9 @@
 doctype html
-html(ng-app)
+html(ng-app='myApp')
 	head
 		title Sample file
 		script(src='js/angular.min.js')
+		script(src='js/app.js')
 	body
 		h1 Sample header
 		p1 sample footer
@@ -10,3 +11,5 @@ html(ng-app)
 			input(ng-model='name', type='text')
 		= '\n'
 		p1 {{name}}
+
+		.scopeTest(ng-controller='myController') My name is {{name}} age {{age}}

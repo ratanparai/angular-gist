@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var pug = require('gulp-pug');
+var plumber = require('gulp-plumber');
 
 // file location
 var options = {
@@ -11,25 +12,41 @@ var options = {
 	pug : {
 		src : 'src/pug/**/*.pug',
 		dest : 'public/'
+	},
+	js : {
+		src : 'src/js/**/*.js',
+		dest : 'public/js'
 	}
 };
 
 // Gulp task to copy required files to public folder so that we can use them
 // on our web app
-gulp.task('copy', function(){
+gulp.task('angular', function(){
     return gulp.src(options.angular.srcMin)
         .pipe(gulp.dest(options.angular.dest));
 
 });
+
+gulp.task('js', function () {
+	return gulp.src(options.js.src)
+		.pipe(gulp.dest(options.js.dest));
+})
+
+/*
+ * copy tasks
+ */
+gulp.task('copy', ['angular', 'js']);
 
 
 /* pug
  * ----*/
 gulp.task('pug', function(){
 	return gulp.src(options.pug.src)
+		.pipe(plumber())
 		.pipe(pug({
 			pretty : true
 		}))
+		.pipe(plumber.stop())
 		.pipe(gulp.dest(options.pug.dest));
 
 });
@@ -37,10 +54,7 @@ gulp.task('pug', function(){
 /* ------------------------- *
  *          BUILD
  * ------------------------- */
- gulp.task('default', function(callback){
- 	runSequence(['copy', 'pug'],
- 		callback);
- });
+ gulp.task('default', ['pug', 'copy', 'watch']);
 
 
 /* ------------------------- *
@@ -51,5 +65,6 @@ gulp.task('pug', function(){
 
 gulp.task('watch', ['copy', 'pug'] ,function(){
 	gulp.watch(options.pug.src, ['pug']); // pug
+	gulp.watch(options.js.src, ['js']); // js
 });
 
